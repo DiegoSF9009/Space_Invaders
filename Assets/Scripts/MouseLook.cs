@@ -1,17 +1,12 @@
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
-
 public class MouseLook : MonoBehaviour
 {
     [SerializeField]
-
     private float mouseSensivity = 100f;
-
     private float xRotation = 0f;
-
     private float yRotation = 0f;
-
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -33,10 +28,6 @@ public class MouseLook : MonoBehaviour
         transform.localRotation = Quaternion.Euler(xRotation, yRotation, 0f);
 
     }
-
-
-
-
 
 }
 
