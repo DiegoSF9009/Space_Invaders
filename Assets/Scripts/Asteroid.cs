@@ -10,8 +10,6 @@ public class Asteroid : MonoBehaviour
     private Transform target;
     private Health health;
     [SerializeField]
-    private float  maxHealth = 100f;
-    [SerializeField]
     private float bulletDamage = 25f;
     [SerializeField]
     private float speed = 5f;
@@ -56,6 +54,7 @@ public class Asteroid : MonoBehaviour
         {   
             Vector3 direction = (target.position - transform.position).normalized;
             transform.position += direction * speed * Time.deltaTime;
+            transform.LookAt(target);
             if (Vector3.Distance(transform.position, target.position)<= distanceToTarget)
             {
                 DestroyAsteroid();

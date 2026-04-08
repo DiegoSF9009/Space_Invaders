@@ -274,7 +274,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33246d7970a86da4b9bc57a8dc061585, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Bullet
-  speed: 1000
+  speed: 2000
 --- !u!114 &22761551736132072
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -287,4 +287,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a93a936446788743bdc6d5888a20b9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DestroyInSeconds
-  secondsToDestroy: 2
+  secondsToDestroy: 4
