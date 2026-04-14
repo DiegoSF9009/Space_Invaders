@@ -5,7 +5,6 @@ using System.Collections;
 public class EnemySpaceship : MonoBehaviour
 {
     [SerializeField]
-
     private float damage = 20f;
     [SerializeField]
     private float playerDamage = 10f;
@@ -17,13 +16,13 @@ public class EnemySpaceship : MonoBehaviour
     private Animator animator;
     private Health targetHealth;
     [SerializeField]
-
     private Health health;
     [SerializeField]
     private UnityEvent<Transform> onDestroyed;
     public UnityEvent<Transform> OnDestroyed => onDestroyed;
 
     private Coroutine animationCoroutine;
+    
     public Health TargetHealth
     {
         
@@ -31,7 +30,6 @@ public class EnemySpaceship : MonoBehaviour
         {
             targetHealth = value;
         }
-
     }
 
     private InstantiatePoolObjects bulletPool;
@@ -41,9 +39,7 @@ public class EnemySpaceship : MonoBehaviour
         {
             bulletPool = value;
         }
-
     }
-
     private void OnEnable()
     {
         health.InitializeHealth();
@@ -74,13 +70,12 @@ public class EnemySpaceship : MonoBehaviour
     private void OnDisable()
     {
         targetHealth = null;
+        onDestroyed.Invoke(transform);
         OnDestroyed.RemoveAllListeners();
         if (animationCoroutine != null)
         {
-            
             StopCoroutine(animationCoroutine);
             animationCoroutine = null;
-
         }
     }
 

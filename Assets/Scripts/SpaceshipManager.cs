@@ -5,7 +5,6 @@ using UnityEngine.Events;
 public class SpaceshipManager : MonoBehaviour
 {
    [SerializeField]
-
    private Health playerHealth;
    [SerializeField]
    private int numberOfSpaceships = 5;
@@ -14,22 +13,39 @@ public class SpaceshipManager : MonoBehaviour
    [SerializeField]
    private InstantiatePoolObjects bulletPool;
    [SerializeField]
+   private UnityEvent onInstantiateShip;
+   [SerializeField]
    private float timeToSpawn = 15f;
    [SerializeField]
    private UnityEvent<Transform> onShipDestroyed;
+   [SerializeField]
+   private UnityEvent onAllShipsDestroyed;
+   private int destroyedSpaceships = 0;
 
    public void OnDestroyShip(Transform transform)
     {
-       onShipDestroyed.Invoke(transform);         
-    }
-    private void Start()
+        destroyedSpaceships++;
+       onShipDestroyed.Invoke(transform);  
+       if (destroyedSpaceships >= numberOfSpaceships)
+        {
+            onAllShipsDestroyed?.Invoke();
+        }
+    }   
+    public void StartShips()
     {
         StartCoroutine(SpawnSpaceships());
+    }
+
+    public void StopShips()
+    {
+        StopAllCoroutines();
+        spaceshipPool.DeactivateAllObjects();
     }
     private IEnumerator SpawnSpaceships()
     {
         numberOfSpaceships--;
         yield return new WaitForSeconds(timeToSpawn);
+        onInstantiateShip?.Invoke();
         spaceshipPool.InstantiateObject(transform);
         EnemySpaceship spaceship = spaceshipPool.GetCurrentObject().GetComponent<EnemySpaceship>();
         spaceship.TargetHealth = playerHealth;
