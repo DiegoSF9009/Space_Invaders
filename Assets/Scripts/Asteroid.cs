@@ -14,10 +14,10 @@ public class Asteroid : MonoBehaviour
     [SerializeField]
     private float speed = 5f;
     [SerializeField]
-    private float distanceToTarget = 2f;
-
+    private float asteroidDamage = 10f;
     [SerializeField]
-    
+    private float distanceToTarget = 2f;
+    [SerializeField]
      private UnityEvent<Transform> onAsteroidDestroyed;
     
     public UnityEvent<Transform> OnAsteroidDestroyed => onAsteroidDestroyed;
@@ -38,9 +38,7 @@ public class Asteroid : MonoBehaviour
 
     public void OnPointerClick()
     {
-        
         health.TakeDamage(bulletDamage);
-
     }
 
     public void SetTarget(Transform target)
@@ -57,6 +55,7 @@ public class Asteroid : MonoBehaviour
             transform.LookAt(target);
             if (Vector3.Distance(transform.position, target.position)<= distanceToTarget)
             {
+                target.GetComponent<Health>().TakeDamage(asteroidDamage);
                 DestroyAsteroid();
             }
 
