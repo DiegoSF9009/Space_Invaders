@@ -522,6 +522,8 @@ MonoBehaviour:
   bulletPivot: {fileID: 4028962041009404947}
   flyAnimationNames:
   - Fly1
+  - Fly2
+  - Fly3
   animator: {fileID: 5123402821132341031}
   health: {fileID: 8828471975048076028}
   onDestroyed:

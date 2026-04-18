@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.Events;
-
+ 
 public class AsteroidManager : MonoBehaviour
 {
     [SerializeField]
@@ -17,30 +17,27 @@ public class AsteroidManager : MonoBehaviour
     private UnityEvent onAllAsteroidsDestroyed;
     [SerializeField]
     private UnityEvent onInstantiateAsteroid;
-    private int  asteroidsDestroyed = 0;
+    private int asteroidsDestroyed = 0;
     private bool isActive = true;
     public void StartAsteroids()
     {
-        float initalDelay = 0f;
+        float iniialDelay = 0f;
         for (int i = 0; i < numberOfAsteroids; i++)
         {
-            Invoke("SpawnAsteroid", initalDelay);
-            initalDelay += spawnInterval;
-
+            Invoke("SpawnAsteroid", iniialDelay);
+            iniialDelay += spawnInterval;
         }
     }
-
     public void StopAsteroids()
     {
         isActive = false;
         CancelInvoke("SpawnAsteroid");
         asteroidPool.DeactivateAllObjects();
     }
-
     private void SpawnAsteroid()
     {
         if (!isActive) return;
-        Vector3 randomDistanceFromTarget = Random.onUnitSphere * 1200f;
+        Vector3 randomDistanceFromTarget = Random.onUnitSphere * 20f;
         randomDistanceFromTarget.y = Mathf.Abs(randomDistanceFromTarget.y) + 5f;
         Vector3 spawnPosition = target.position + randomDistanceFromTarget;
         asteroidPool.InstantiateObject(spawnPosition);
@@ -49,7 +46,6 @@ public class AsteroidManager : MonoBehaviour
         asteroid.OnAsteroidDestroyed.AddListener(OnAsteroidDestroyed);
         onInstantiateAsteroid?.Invoke();
     }
-
     public void OnAsteroidDestroyed(Transform asteroid)
     {
         asteroidsDestroyed++;
@@ -57,6 +53,5 @@ public class AsteroidManager : MonoBehaviour
             onAllAsteroidsDestroyed?.Invoke();
         onAsteroidDestroyed?.Invoke(asteroid);
     }
-
-  
 }
+ 
